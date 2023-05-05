@@ -50,5 +50,8 @@ func (handler *handler) StartHandling(ctx context.Context) {
 	handler.server.HandleFunc("/transfer/send-transfer", func(w http.ResponseWriter, r *http.Request) {
 		handler.redirect.Redirect(ctx, w, r, "/transfer/send-transfer", nil)
 	})
-	// TODO: redirect web socket
+
+	handler.server.HandleFunc("/websocket", func(w http.ResponseWriter, r *http.Request) {
+		handler.redirect.RedirectWebSocket(ctx, w, r)
+	})
 }

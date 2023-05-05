@@ -11,8 +11,9 @@ import (
 )
 
 var (
-	port    = ""
-	baseUrl = ""
+	port         = ""
+	baseUrl      = "https://api.pasino.com"
+	webSocketUrl = "wss://socket.pasino.com/dice/"
 )
 
 func main() {
@@ -21,7 +22,7 @@ func main() {
 
 	ctx := context.Background()
 	server := http.DefaultServeMux
-	redirect := redirect.Init(ctx, baseUrl, http.DefaultClient)
+	redirect := redirect.Init(ctx, baseUrl, http.DefaultClient, webSocketUrl)
 	hand := handler.Init(ctx, server, redirect)
 
 	hand.StartHandling(ctx)

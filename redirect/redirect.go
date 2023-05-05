@@ -32,7 +32,7 @@ func Init(ctx context.Context, baseUrl string, client *http.Client, webSocketUrl
 }
 
 func (redirect *redirect) Redirect(ctx context.Context, w http.ResponseWriter, r *http.Request, path string, errHandlingResponse func(w http.ResponseWriter, err error)) {
-	log.Printf("INFO: %+v will redirected into %v", r.Host, (redirect.baseUrl + path))
+	log.Printf("INFO: %+v will redirected into %v\n", r.Host, (redirect.baseUrl + path))
 
 	if errHandlingResponse == nil {
 		errHandlingResponse = func(w http.ResponseWriter, err error) {
@@ -76,6 +76,7 @@ func (redirect *redirect) Redirect(ctx context.Context, w http.ResponseWriter, r
 }
 
 func (redirect *redirect) RedirectWebSocket(ctx context.Context, w http.ResponseWriter, r *http.Request) {
+	log.Printf("INFO: WebSocket on %+v will redirected into %+v\n", r.Host, redirect.webSocketUrl)
 	webSocketDialler := websocket.DefaultDialer
 	headers := http.Header{}
 

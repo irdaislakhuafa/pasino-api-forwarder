@@ -76,7 +76,7 @@ func (redirect *redirect) Redirect(ctx context.Context, w http.ResponseWriter, r
 }
 
 func (redirect *redirect) RedirectWebSocket(ctx context.Context, w http.ResponseWriter, r *http.Request) {
-	log.Printf("INFO: WebSocket on %+v will redirected into %+v\n", r.Host, redirect.webSocketUrl)
+	log.Printf("INFO: WebSocket on %+v will redirected into %+v\n", (r.Host + r.URL.Path), redirect.webSocketUrl)
 	webSocketDialler := websocket.DefaultDialer
 	headers := http.Header{}
 

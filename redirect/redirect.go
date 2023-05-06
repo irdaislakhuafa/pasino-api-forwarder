@@ -86,14 +86,14 @@ func (redirect *redirect) RedirectWebSocket(ctx context.Context, w http.Response
 	}
 	defer webSocketConnection.Close()
 
-	webSockerUpgrader := websocket.Upgrader{
+	webSocketUpgrader := websocket.Upgrader{
 		CheckOrigin: func(r *http.Request) bool {
 			// logic to allow origin here
 			return true
 		},
 	}
 	// Upgrade HTTP connection to WebSocket
-	clientConnection, err := webSockerUpgrader.Upgrade(w, r, nil)
+	clientConnection, err := webSocketUpgrader.Upgrade(w, r, nil)
 	if err != nil {
 		message := fmt.Sprintf("Failed to upgrade HTTP connection to WebSockets: %v", err)
 		log.Println(message)

@@ -72,7 +72,6 @@ func (redirect *redirect) Redirect(ctx context.Context, w http.ResponseWriter, r
 		}
 		w.Header().Set(k, head)
 	}
-	return
 }
 
 func (redirect *redirect) RedirectWebSocket(ctx context.Context, w http.ResponseWriter, r *http.Request) {
@@ -82,7 +81,8 @@ func (redirect *redirect) RedirectWebSocket(ctx context.Context, w http.Response
 
 	webSocketConnection, _, err := webSocketDialler.DialContext(ctx, redirect.webSocketUrl, headers)
 	if err != nil {
-		log.Fatalf("Failed to connect to WebSocket: %v", err)
+		log.Println("Failed to connect to WebSocket:", err)
+		return
 	}
 	defer webSocketConnection.Close()
 
